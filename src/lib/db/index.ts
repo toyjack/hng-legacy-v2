@@ -1,5 +1,5 @@
-import { rawGlyphs } from "@/constant/glyphs";
-import { rawMain } from "@/constant/main";
+import main from "@/constant/main";
+import glyphs from "@/constant/glyphs.json";
 
 export type Glyph = {
   id: string;
@@ -18,6 +18,9 @@ export type Record = {
   ucs: string;
 };
 
+export const glyphsData = glyphs as Glyph[];
+
+export const mainData = main as Record[];
 export type Results = {
   character: Record | undefined;
   glyphs: Glyph[];
@@ -30,11 +33,11 @@ export function getImagePath(glyph: Glyph) {
 }
 
 export function getEntryByChar(char: string) {
-  const result = rawMain.find(
+  const result = mainData.find(
     (data) => data.entry == char || data.variants.includes(char)
   );
   const djt = result?.djt;
-  const glyphsDataResult = rawGlyphs.filter((data) => data.id == djt);
+  const glyphsDataResult = glyphsData.filter((data) => data.id == djt);
 
   const results = {
     character: result,
