@@ -1,44 +1,42 @@
-import main from "@/constant/main.json";
-import glyphs from "@/constant/glyphs.json";
+import { rawGlyphs } from "@/constant/glyphs";
+import { rawMain } from "@/constant/main";
 
-export type Glyph={
-  "id": string
-  "glyph_num": string
-  "glyphs":string
-  "occerrences":string
-  "book_id": string
-  }
+export type Glyph = {
+  id: string;
+  glyph_num: string;
+  glyphs: string;
+  occerrences: string;
+  book_id: string;
+};
 
-  export type Record={
-    entry: string;
-    variants: string;
-    id: string;
-    djt: string;
-    dkw: string;
-    ucs: string;
-  }
+export type Record = {
+  entry: string;
+  variants: string;
+  id: string;
+  djt: string;
+  dkw: string;
+  ucs: string;
+};
 
-export const glyphsData = glyphs as Glyph[];
-
-export const mainData = main as Record [];
-export type Results ={
+export type Results = {
   character: Record | undefined;
   glyphs: Glyph[];
-}
+};
 
 export function getImagePath(glyph: Glyph) {
-  const path=`/images/${glyph.book_id}/${glyph.glyph_num}.png`;
+  const imageHost="https://hng-images.kojisho.com";
+  const path = `${imageHost}/${glyph.book_id}/${glyph.glyph_num}.png`;
   return path;
 }
 
 export function getEntryByChar(char: string) {
-  const result = mainData.find(
+  const result = rawMain.find(
     (data) => data.entry == char || data.variants.includes(char)
   );
   const djt = result?.djt;
-  const glyphsDataResult = glyphsData.filter((data) => data.id == djt);
+  const glyphsDataResult = rawGlyphs.filter((data) => data.id == djt);
 
-  const results={
+  const results = {
     character: result,
     glyphs: glyphsDataResult,
   } as Results;
