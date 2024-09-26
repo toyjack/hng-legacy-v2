@@ -1,18 +1,19 @@
 "use client";
+import { MdInfoOutline } from "react-icons/md";
 import Info from "./info";
 
 export default function InfoButton() {
   return (
     <>
       <button
-        className="btn btn-info"
+        className="btn btn-ghost md:text-3xl"
         onClick={() =>
           (
             document.getElementById("info_modal") as HTMLDialogElement
           ).showModal()
         }
       >
-        使い方
+        <MdInfoOutline />
       </button>
       
       <dialog id="info_modal" className="modal">

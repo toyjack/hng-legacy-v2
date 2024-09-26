@@ -1,5 +1,7 @@
 "use client";
 
+import { MdLanguage } from "react-icons/md";
+
 import { useChangeLocale } from "@/locales/client";
 
 export default function LangButton() {
@@ -16,9 +18,9 @@ export default function LangButton() {
       <div
         tabIndex={0}
         role="button"
-        className="btn btn-ghost"
+        className="btn btn-ghost md:text-3xl"
       >
-        Lang
+        <MdLanguage />
       </div>
       <ul
         tabIndex={0}

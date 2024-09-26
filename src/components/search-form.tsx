@@ -3,6 +3,7 @@
 import { useCurrentLocale } from "@/locales/client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { CiSearch } from "react-icons/ci";
 
 export default function SearchForm() {
   const router = useRouter();
@@ -26,8 +27,8 @@ export default function SearchForm() {
           }
         }}
       />
-      <button className="btn btn-primary join-item" onClick={() => search()}>
-        検索
+      <button className="btn btn-primary join-item md:text-3xl" onClick={() => search()}>
+      <CiSearch />
       </button>
     </div>
   );
