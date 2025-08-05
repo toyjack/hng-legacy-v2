@@ -59,9 +59,59 @@ Core types in `src/types.d.ts`:
 
 Character glyph images are served from external domain `hng-images.kojisho.com` with Next.js Image optimization disabled in config.
 
+## RESTful API
+
+### API Structure
+
+The project includes a comprehensive RESTful API built with Next.js Route Handlers:
+
+- **Base URL**: `/api/v1`
+- **Response Format**: Standardized JSON with success/error states
+- **Features**: Parameter validation, error handling, pagination, filtering
+
+### Key API Endpoints
+
+#### Character Search
+- `GET /api/v1/characters/{character}` - Query by character
+- `GET /api/v1/characters/search?q={character}` - Search with options
+- `GET /api/v1/characters/djt/{djt_number}` - Query by DJT number (5 digits)
+- `GET /api/v1/characters/dkw/{dkw_number}` - Query by DKW number (M+5 digits)
+- `GET /api/v1/characters/id/{unified_id}` - Query by unified ID
+- `POST /api/v1/characters/batch` - Batch character queries (max 50)
+- `GET /api/v1/characters/{character}/glyphs` - Get character glyphs with filtering
+- `GET /api/v1/characters/{character}/stats` - Character usage statistics
+
+#### Document/Book Management
+- `GET /api/v1/books` - List books with pagination and filtering
+- `GET /api/v1/books/{book_id}` - Get book details
+- `GET /api/v1/book-types` - List book categories
+- `GET /api/v1/book-types/{type_id}/books` - Books by category
+
+#### Glyph Images
+- `GET /api/v1/glyphs/{glyph_id}` - Get glyph by ID (format: 00001A)
+- `GET /api/v1/glyphs/book/{book_id}/glyph/{glyph_number}` - Get glyph by book and number
+
+#### Statistics
+- `GET /api/v1/stats` - Database statistics
+- `GET /api/v1` - API documentation
+
+### API Implementation
+
+- **Location**: `src/app/api/v1/` - Route handlers
+- **Utils**: `src/lib/api/` - Response formatting and database access
+- **Testing**: `/[locale]/api-test` - API testing interface
+
+### Query Parameters
+
+- **Pagination**: `page`, `limit` (max 100)
+- **Filtering**: `book_type`, `era`, `date_from`, `date_to`, `location`, `authority`
+- **Options**: `include_variants`, `include_images`, `fields`
+
 ### Development Notes
 
 - Uses PNPM for package management
 - Has custom DaisyUI theme configuration 
 - Contains TODO items: variant character search suggestions, table view
 - Includes debug output (JSON.stringify in character pages)
+- API follows RESTful conventions with proper HTTP status codes
+- All API responses use consistent JSON format with error handling
